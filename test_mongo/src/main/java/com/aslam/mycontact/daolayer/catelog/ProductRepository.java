@@ -1,4 +1,4 @@
-package com.aslam.mycontact.daolayer.productdocument;
+package com.aslam.mycontact.daolayer.catelog;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

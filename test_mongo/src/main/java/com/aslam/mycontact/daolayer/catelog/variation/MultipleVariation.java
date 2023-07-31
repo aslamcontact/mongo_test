@@ -1,4 +1,4 @@
-package com.aslam.mycontact.daolayer.productdocument.variation;
+package com.aslam.mycontact.daolayer.catelog.variation;
 
 import java.util.HashMap;
 import java.util.Map;

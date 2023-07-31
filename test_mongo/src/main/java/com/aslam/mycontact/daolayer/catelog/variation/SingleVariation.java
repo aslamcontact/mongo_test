@@ -1,6 +1,6 @@
-package com.aslam.mycontact.daolayer.productdocument.variation;
+package com.aslam.mycontact.daolayer.catelog.variation;
 
-import com.aslam.mycontact.daolayer.productdocument.Quantity;
+import com.aslam.mycontact.daolayer.catelog.Quantity;
 
 import java.util.HashMap;
 import java.util.Map;

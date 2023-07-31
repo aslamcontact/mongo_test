@@ -1,9 +1,9 @@
 package com.aslam.mycontact.businesslayer;
 
-import com.aslam.mycontact.daolayer.productdocument.*;
-import com.aslam.mycontact.daolayer.productdocument.variation.MultipleVariation;
-import com.aslam.mycontact.daolayer.productdocument.variation.SingleVariation;
-import com.aslam.mycontact.daolayer.productdocument.variation.Variation;
+import com.aslam.mycontact.daolayer.catelog.*;
+import com.aslam.mycontact.daolayer.catelog.variation.MultipleVariation;
+import com.aslam.mycontact.daolayer.catelog.variation.SingleVariation;
+import com.aslam.mycontact.daolayer.catelog.variation.Variation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

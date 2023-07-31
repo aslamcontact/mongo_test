@@ -1,4 +1,4 @@
-package com.aslam.mycontact.daolayer.productdocument;
+package com.aslam.mycontact.daolayer.catelog;
 
 public class NosQuantity implements Quantity{
     Long quantity;
