@@ -1,6 +1,8 @@
-package com.aslam.mycontact.daolayer.catelog;
+package com.aslam.mycontact.daolayer.catelog.quantity;
 
-public class NosQuantity implements Quantity{
+import com.aslam.mycontact.daolayer.catelog.quantity.Quantity;
+
+public class NosQuantity implements Quantity {
     Long quantity;
     Double price;
 

@@ -1,6 +1,7 @@
 package com.aslam.mycontact.businesslayer;
 
 import com.aslam.mycontact.daolayer.catelog.*;
+import com.aslam.mycontact.daolayer.catelog.quantity.NosQuantity;
 import com.aslam.mycontact.daolayer.catelog.variation.MultipleVariation;
 import com.aslam.mycontact.daolayer.catelog.variation.SingleVariation;
 import com.aslam.mycontact.daolayer.catelog.variation.Variation;
@@ -13,47 +14,6 @@ import java.util.*;
 public class DataAcessLogic {
     @Autowired
     private ProductRepository productRepository;
-/*
-    public void productTest1()
-    {
-       Product shirt=createProduct("Roadsted shirt",
-                                    List.of("myntras brand","all new design")
-                                  );
-
-       Attribute<ProductQuantity> shirtAttribute=createAttribute( Map.of(
-                                             "L",new ProductQuantity(12L),
-                                             "M",new ProductQuantity(5L),
-                                             "S",new ProductQuantity(7L)
-                                            ),
-                                        "Size"
-                                      );
-       Attribute<Attribute> shirtColors=createAttribute( Map.of(
-                                                 "red",shirtAttribute,
-                                                 "blue",shirtAttribute
-
-               ),
-               "colors"
-
-       );
-
-       shirt.setProductAttributes(shirtColors);
-       productRepository.save(shirt);
-
-
-    }
-
-    private Product createProduct(String productName,List<String> descriptions)
-    {
-
-        return new Product(productName,descriptions);
-    }
-
-    private <T> Attribute<T> createAttribute(Map<String,T> values,String name)
-    {
-        return new Attribute<T>(name,values);
-    }
-*/
-
 
     public void productTest2() {
 

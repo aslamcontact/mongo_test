@@ -13,7 +13,7 @@ public class TestingCommandLine implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-      //  dataAcessLogic.productTest1();
+
         dataAcessLogic.productTest2();
 
 
