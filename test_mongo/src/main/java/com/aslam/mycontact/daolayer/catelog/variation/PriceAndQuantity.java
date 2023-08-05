@@ -1,13 +1,11 @@
 package com.aslam.mycontact.daolayer.catelog.category;
 
-import com.sun.jdi.PrimitiveValue;
-
-public class PriceAndQuenty {
+public class PriceAndQuantity {
 
     private Integer price;
     private  Integer Quanty;
 
-    public PriceAndQuenty(Integer price, Integer quanty) {
+    public PriceAndQuantity(Integer price, Integer quanty) {
         this.price = price;
         Quanty = quanty;
     }

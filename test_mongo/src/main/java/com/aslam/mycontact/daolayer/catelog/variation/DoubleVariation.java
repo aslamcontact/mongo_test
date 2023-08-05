@@ -12,7 +12,7 @@ public class DoubleVariation extends SingleVariation implements VariationV1{
 
         this.variations = variations;
     }
-    public PriceAndQuenty filterVariation(String key1,String key2)
+    public PriceAndQuantity filterVariation(String key1, String key2)
     {
         return variations.get(key1).filterVariation(key2);
     }
