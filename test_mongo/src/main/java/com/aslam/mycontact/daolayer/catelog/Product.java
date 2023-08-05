@@ -1,6 +1,5 @@
 package com.aslam.mycontact.daolayer.catelog;
 
-import com.aslam.mycontact.daolayer.catelog.variation.Variation;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

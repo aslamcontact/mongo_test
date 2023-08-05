@@ -1,4 +1,4 @@
-package com.aslam.mycontact.daolayer.catelog.category;
+package com.aslam.mycontact.daolayer.catelog.variation;
 
 import java.util.Map;
 

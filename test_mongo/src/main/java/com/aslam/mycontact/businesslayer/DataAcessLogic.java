@@ -1,7 +1,9 @@
 package com.aslam.mycontact.businesslayer;
 
 import com.aslam.mycontact.daolayer.catelog.*;
-import com.aslam.mycontact.daolayer.catelog.category.*;
+import com.aslam.mycontact.daolayer.catelog.variation.DoubleVariation;
+import com.aslam.mycontact.daolayer.catelog.variation.PriceAndQuantity;
+import com.aslam.mycontact.daolayer.catelog.variation.SingleVariation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +21,14 @@ public class DataAcessLogic {
                         blueShirt=new SingleVariation("BlueShirt");
 
          redShirt.setVariations(Map.of(
-                 "L",new PriceAndQuenty(627,8),
-                 "M",new PriceAndQuenty(574,1),
-                 "S",new PriceAndQuenty(263,5)
+                 "L",new PriceAndQuantity(627,8),
+                 "M",new PriceAndQuantity(574,1),
+                 "S",new PriceAndQuantity(263,5)
          )  );
         blueShirt.setVariations(Map.of(
-                "L",new PriceAndQuenty(1004,12),
-                "M",new PriceAndQuenty(1344,34),
-                "S",new PriceAndQuenty(2444,45)
+                "L",new PriceAndQuantity(1004,12),
+                "M",new PriceAndQuantity(1344,34),
+                "S",new PriceAndQuantity(2444,45)
         )  );
 
 
