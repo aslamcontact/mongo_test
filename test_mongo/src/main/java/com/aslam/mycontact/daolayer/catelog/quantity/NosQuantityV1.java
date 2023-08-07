@@ -27,4 +27,12 @@ public class NosQuantityV1 implements QuantityV1 {
     public void setPrice(PriceV1 price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "NosQuantityV1{" +
+                "quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
 }

@@ -2,8 +2,10 @@ package com.aslam.mycontact.daolayer.catelog.variation;
 
 import com.aslam.mycontact.daolayer.catelog.quantity.QuantityV1;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class DoubleVariation implements VariationV1 {
 
@@ -24,6 +26,9 @@ public class DoubleVariation implements VariationV1 {
         return variations;
     }
 
+    public void setVariations(Map<String, SingleVariation> variations) {
+        this.variations = variations;
+    }
 
     public String getName() {
         return name;
@@ -35,9 +40,21 @@ public class DoubleVariation implements VariationV1 {
     }
 
     @Override
-    public QuantityV1 getTotalQuantity() {
-        return null;
+    public Optional<QuantityV1> getTotalQuantity() {
+
+        Comparator<QuantityV1> finMinPrice=(prevoius, current)->
+        {
+            return prevoius.getPrice().getPricePerItem()
+                    .compareTo(current.getPrice().getPricePerItem());
+
+        };
+        return variations.values().stream()
+                .flatMap(doubleVar->doubleVar.getVariations().values().stream())
+                .filter(q -> q.getQuantity() > 0)
+                .min(finMinPrice);
     }
+
+
 
 
 }
