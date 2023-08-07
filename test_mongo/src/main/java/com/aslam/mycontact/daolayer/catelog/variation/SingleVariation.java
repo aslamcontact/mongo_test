@@ -1,30 +1,59 @@
 package com.aslam.mycontact.daolayer.catelog.variation;
+import com.aslam.mycontact.daolayer.catelog.quantity.QuantityV1;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class SingleVariation extends NoVariation {
+public class SingleVariation implements VariationV1 {
 
-    private String variationName;
-    private Map<String, PriceAndQuantity> variations;
+    private String name;
 
-    public SingleVariation(String variationName) {
-        this.variationName=variationName;
-        setPriceAndQuenty(new PriceAndQuantity(345,5));
+    private VariationType type;
+
+    //variation type and price or quantity ids
+    private Map<String, QuantityV1> variations;
+
+    public SingleVariation(String name) {
+
+        this.name=name;
+        this.variations=new HashMap<>();
+        this.type=VariationType.SINGLE;
 
     }
 
-  public PriceAndQuantity filterVariation(String key)
-  {
-      return variations.get(key);
-  }
-
-    public Map<String, PriceAndQuantity> getVariations() {
-        return variations;
+    public SingleVariation() {
+        this.type=VariationType.SINGLE;
     }
 
-    public void setVariations(Map<String, PriceAndQuantity> variations) {
-        this.variations = variations;
+
+
+
+
+    @Override
+    public  Map<String,QuantityV1> getVariations() {
+        return this.variations;
     }
+
+
+    @Override
+    public VariationType getType() {
+        return this.type;
+    }
+
+    @Override
+    public QuantityV1 getTotalQuantity() {
+        return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 
 
 }

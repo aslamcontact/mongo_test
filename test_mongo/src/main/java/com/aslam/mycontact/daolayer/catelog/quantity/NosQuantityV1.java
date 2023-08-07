@@ -1,12 +1,13 @@
 package com.aslam.mycontact.daolayer.catelog.quantity;
 
-import com.aslam.mycontact.daolayer.catelog.quantity.Quantity;
+import com.aslam.mycontact.daolayer.catelog.Pricing.PriceV1;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class NosQuantity implements Quantity {
+public class NosQuantityV1 implements QuantityV1 {
     Long quantity;
-    Double price;
 
-    public NosQuantity(Long quantity, Double price) {
+    PriceV1 price;
+    public NosQuantityV1(Long quantity,   PriceV1 price) {
         this.quantity = quantity;
         this.price = price;
     }
@@ -19,11 +20,11 @@ public class NosQuantity implements Quantity {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
+    public PriceV1 getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(PriceV1 price) {
         this.price = price;
     }
 }

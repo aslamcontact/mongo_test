@@ -1,8 +1,14 @@
 package com.aslam.mycontact.daolayer.catelog.variation;
 
-public interface VariationV1 {
+import com.aslam.mycontact.daolayer.catelog.quantity.QuantityV1;
 
-    public PriceAndQuantity filterVariation();
-    public PriceAndQuantity filterVariation(String key);
-    public PriceAndQuantity filterVariation(String key1, String Key2);
+import java.util.Map;
+
+public interface VariationV1<T> {
+      Map<String, T> getVariations();
+      String getName();
+      VariationType getType();
+      QuantityV1 getTotalQuantity();
+
+
 }
