@@ -16,23 +16,25 @@ public class DataAcessLogic {
     @Autowired
     private ProductRepository productRepository;
 
+
+    //create Product without any variation
+
     public Optional<Product> createProduct( String productName,
                                String productBrand,
                                List<String> descriptions,
                                Double price,
-                               Long quantity) {
+                               Long quantity)
+    {
 
-                   Product createdProduct;
-                   productRepository.findById(
-                           "Id_"+productName.toLowerCase()+productBrand.toLowerCase()).ifPresent(
-                                   res-> {
+                  productBrand=productName.trim().toLowerCase();
+                  productName=productName.trim().toLowerCase();
 
-                                          throw new IllegalStateException("Use Another product and brand name"
-                                            +res.getProductName());
-                                       }
-                                  );
+                  if(checkProduct(productName,productBrand))
+                      throw new IllegalStateException("Product id already Stored "+productName);
 
-           createdProduct=newProduct( productName,
+                  Product createdProduct;
+
+                  createdProduct=newProduct( productName,
                                       productBrand,
                                       descriptions
                                      );
@@ -42,6 +44,13 @@ public class DataAcessLogic {
                    return Optional.of(productRepository.save(createdProduct));
 
     }
+
+    private Boolean checkProduct(String productName,String brand)
+    {
+
+        return productRepository.findById("Id_"+productName+brand).isPresent();
+    }
+
     private Product newProduct(String name,String brand,List<String> descriptions)
     {
         Product newProduct=new Product(name,brand);
