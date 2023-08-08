@@ -16,8 +16,7 @@ public class DoubleVariation implements VariationV1 {
     private Map<String, SingleVariation> variations;
 
 
-    public DoubleVariation(String name) {
-        this.name=name;
+    public DoubleVariation() {
         this.type=VariationType.DOUBLE;
         this.variations = new HashMap<>();
     }
@@ -32,6 +31,10 @@ public class DoubleVariation implements VariationV1 {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

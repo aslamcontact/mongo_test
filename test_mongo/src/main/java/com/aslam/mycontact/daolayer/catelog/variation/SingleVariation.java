@@ -19,15 +19,10 @@ public class SingleVariation implements VariationV1 {
     //variation type and price or quantity ids
     private Map<String, QuantityV1> variations;
 
-    public SingleVariation(String name) {
 
-        this.name=name;
+    public SingleVariation()
+    {
         this.variations=new HashMap<>();
-        this.type=VariationType.SINGLE;
-
-    }
-
-    public SingleVariation() {
         this.type=VariationType.SINGLE;
     }
 
