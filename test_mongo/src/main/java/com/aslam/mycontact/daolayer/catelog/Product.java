@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 @Document
 public class Product {
 
+    //id Start witth Id_ and combine productName and brand
     @Id
-
     private String productId;
 
     private String productName;
@@ -32,7 +32,8 @@ public class Product {
         this.productName = productName.toLowerCase();
         this.variationType=VariationType.NONE;
         this.brand=brand.toLowerCase();
-        this.productId=productName+brand.toLowerCase();
+        this.productId="Id_"+productName.toLowerCase()
+                               +brand.toLowerCase();
 
     }
 
@@ -103,7 +104,7 @@ public class Product {
     }
 
     public void setProductID(String productId) {
-        this.productId = productId.toLowerCase();
+        this.productId = "Id_"+productId.toLowerCase();
     }
 
     public String getBrand() {
