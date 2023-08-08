@@ -15,7 +15,11 @@ import java.util.stream.Stream;
 public class Product {
 
     @Id
-   private String productName;
+
+    private String productId;
+
+    private String productName;
+    private String brand;
    private List<String> productDescription;
 
    private VariationV1<?> variation;
@@ -24,15 +28,14 @@ public class Product {
 
    private QuantityV1 quantityAndPrice;
 
-    public Product(String productName) {
+    public Product(String productName,String brand) {
         this.productName = productName;
         this.variationType=VariationType.NONE;
+        this.productId=productName+brand;
 
     }
 
-    public Product() {
 
-    }
 
 
     public Optional<QuantityV1> getQuantityAndPrice() {
@@ -94,5 +97,19 @@ public class Product {
         this.productDescription = productDescription;
     }
 
+    public String getProductID() {
+        return productId;
+    }
 
+    public void setProductID(String productId) {
+        this.productId = productId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 }
