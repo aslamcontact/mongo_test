@@ -22,24 +22,24 @@ public class DataAcessLogic {
                                Double price,
                                Long quantity) {
 
-           productRepository
-                   .findById("Id_"+productName.toLowerCase()+productBrand.toLowerCase())
-                     .ifPresent(res-> {
+                   Product createdProduct;
+                   productRepository.findById(
+                           "Id_"+productName.toLowerCase()+productBrand.toLowerCase()).ifPresent(
+                                   res-> {
 
-                            throw new IllegalStateException("Use Another product and brand name"
-                                        +res.getProductName());
+                                          throw new IllegalStateException("Use Another product and brand name"
+                                            +res.getProductName());
                                        }
                                   );
 
-          Product product=newProduct( productName,
+           createdProduct=newProduct( productName,
                                       productBrand,
                                       descriptions
                                      );
-          product.setQuantityAndPrice(newQuantity(newPrice(price),quantity));
+                   createdProduct
+                  .setQuantityAndPrice(newQuantity(newPrice(price),quantity));
 
-
-                        return Optional.of(productRepository.save(product));
-
+                   return Optional.of(productRepository.save(createdProduct));
 
     }
     private Product newProduct(String name,String brand,List<String> descriptions)
