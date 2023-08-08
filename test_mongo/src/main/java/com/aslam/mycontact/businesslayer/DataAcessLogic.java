@@ -26,7 +26,7 @@ public class DataAcessLogic {
                                Long quantity)
     {
 
-                  productBrand=productName.trim().toLowerCase();
+                  productBrand=productBrand.trim().toLowerCase();
                   productName=productName.trim().toLowerCase();
 
                   if(checkProduct(productName,productBrand))
@@ -44,6 +44,18 @@ public class DataAcessLogic {
                    return Optional.of(productRepository.save(createdProduct));
 
     }
+    //Delete product
+
+    public void deleteProduct(String productName,String productBrand)
+    {
+        productName=productName.trim().toLowerCase();
+        productBrand=productBrand.trim().toLowerCase();
+        if(!checkProduct(productName,productBrand))
+            throw new IllegalStateException("No Product ( "+productName+" "+productBrand+" )");
+
+        productRepository.deleteById("Id_"+productName+productBrand);
+    }
+
 
     private Boolean checkProduct(String productName,String brand)
     {
