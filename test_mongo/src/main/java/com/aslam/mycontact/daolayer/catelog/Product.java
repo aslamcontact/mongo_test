@@ -29,9 +29,10 @@ public class Product {
    private QuantityV1 quantityAndPrice;
 
     public Product(String productName,String brand) {
-        this.productName = productName;
+        this.productName = productName.toLowerCase();
         this.variationType=VariationType.NONE;
-        this.productId=productName+brand;
+        this.brand=brand.toLowerCase();
+        this.productId=productName+brand.toLowerCase();
 
     }
 
@@ -86,7 +87,7 @@ public class Product {
     }
 
     public void setProductName(String productName) {
-        this.productName = productName;
+        this.productName = productName.toLowerCase();
     }
 
     public List<String> getProductDescription() {
@@ -102,7 +103,7 @@ public class Product {
     }
 
     public void setProductID(String productId) {
-        this.productId = productId;
+        this.productId = productId.toLowerCase();
     }
 
     public String getBrand() {
@@ -110,6 +111,6 @@ public class Product {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        this.brand = brand.toLowerCase();
     }
 }
