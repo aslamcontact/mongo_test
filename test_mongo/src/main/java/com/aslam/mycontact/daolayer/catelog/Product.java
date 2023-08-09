@@ -22,19 +22,25 @@ public class Product {
     private String brand;
    private List<String> productDescription;
 
+   private Map<String,String> about;
+
    private VariationV1<?> variation;
 
    private  VariationType variationType;
 
    private QuantityV1 quantityAndPrice;
 
-    public Product(String productName,String brand) {
+    public Product(  String productName,
+                     String brand,
+                     Map<String,String> about,
+                     List<String> productDescription
+                   ) {
         this.productName = productName.toLowerCase();
         this.variationType=VariationType.NONE;
         this.brand=brand.toLowerCase();
-        this.productId="Id_"+productName.toLowerCase()
-                               +brand.toLowerCase();
-
+        this.productId="Id_"+(productName+brand.trim().toLowerCase());
+        this.about=about;
+        this.productDescription=productDescription;
     }
 
 
@@ -113,5 +119,13 @@ public class Product {
 
     public void setBrand(String brand) {
         this.brand = brand.toLowerCase();
+    }
+
+    public Map<String, String> getAbout() {
+        return about;
+    }
+
+    public void setAbout(Map<String, String> about) {
+        this.about = about;
     }
 }
