@@ -41,6 +41,7 @@ public class Product {
         this.productId="Id_"+(productName+brand.trim().toLowerCase());
         this.about=about;
         this.productDescription=productDescription;
+
     }
 
 
