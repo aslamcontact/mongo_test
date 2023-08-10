@@ -28,6 +28,9 @@ public class NosQuantityV1 implements QuantityV1 {
         this.price = price;
     }
 
+    public NosQuantityV1() {
+    }
+
     @Override
     public String toString() {
         return "NosQuantityV1{" +
