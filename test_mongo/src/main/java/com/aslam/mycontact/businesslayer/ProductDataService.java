@@ -16,8 +16,17 @@ public class ProductDataService {
     @Autowired
     private ProductRepository productRepository;
 
-    AnnotationConfigApplicationContext beans=
-            new AnnotationConfigApplicationContext(BeanConfiguration.class);
+    AnnotationConfigApplicationContext beans= new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
+    private final String qtyBean="nos-quantity";
+    private final String priceBean="price";
+    private final String doubleDivBean = "double-variation";
+    private final String singleDivBean="single-variation";
+
+    private final String productNoneBean="product-none";
+    private final String productVarBean="product-single";
+
+    final
 
 
     public record DoubleDivision(String mainDivName,String subDivName,List<SubDiv> subDivs){};
@@ -27,7 +36,7 @@ public class ProductDataService {
 
 
 
-
+//create product with double div
 
     public Optional<Product> createProduct(     String productName,
                                                 String productBrand,
@@ -38,10 +47,8 @@ public class ProductDataService {
 
     )
     {
-        final String quantityBean="nos-quantity";
-        final String priceBean="price";
-        final String subDivBean="single-variation";
-        final String mainDivBean="double-variation";
+        VariationV1<?> variation;
+        Product newProduct;
         productBrand=productBrand.trim().toLowerCase();
         productName=productName.trim().toLowerCase();
 
@@ -52,11 +59,11 @@ public class ProductDataService {
                 .stream()
                 .collect(Collectors.toMap(
                                           DoubleDivision::mainDivName,
-                                          (nextLevel)-> (SingleVariation) beans.getBean(subDivBean,
+                                          (nextLevel)-> (SingleVariation) beans.getBean(singleDivBean,
                                                                nextLevel.subDivName(),
                                                                nextLevel.subDivs().stream()
                                                                .collect(Collectors.toMap(SubDiv::divideValue,
-                                                                       q->beans.getBean(  quantityBean,
+                                                                       q->beans.getBean(  qtyBean,
                                                                                            q.quantity(),
                                                                                            beans.getBean(priceBean,
                                                                                                           q.price()))))
@@ -68,22 +75,18 @@ public class ProductDataService {
 
                   );
 
+         variation = (VariationV1<?>) beans.getBean(doubleDivBean,divisionName,divResult);
 
 
+         newProduct= (Product) beans.getBean( productVarBean,
+                                              productName,
+                                              productBrand,
+                                              aboutProduct,
+                                              descriptions,
+                                               variation);
 
 
-        VariationV1<?> variation= (VariationV1<?>) beans.getBean(mainDivBean,divisionName,divResult);
-
-
-        Product createdProduct= (Product) beans.getBean( "product-single",
-                productName,
-                productBrand,
-                aboutProduct,
-                descriptions,
-                variation);
-
-
-        return Optional.of(productRepository.save(createdProduct));
+        return Optional.of(productRepository.save(newProduct));
 
     }
 
@@ -100,6 +103,10 @@ public class ProductDataService {
                                             )
     {
 
+        VariationV1<?> variation;
+        Product newProduct;
+
+
         productBrand=productBrand.trim().toLowerCase();
         productName=productName.trim().toLowerCase();
         if(checkProduct(productName,productBrand))
@@ -110,9 +117,9 @@ public class ProductDataService {
                                             .collect( Collectors.toMap(
                                                       SingleDivision::divideValue,
                                                       subQuantity->
-                                                       (QuantityV1) beans.getBean(  "nos-quantity",
+                                                       (QuantityV1) beans.getBean(  qtyBean,
                                                                                      subQuantity.quantity(),
-                                                                                     beans.getBean( "price",
+                                                                                     beans.getBean( priceBean,
                                                                                                      subQuantity.price()
                                                                                                   )
                                                                                   )
@@ -120,18 +127,18 @@ public class ProductDataService {
                                                    );
 
 
-        VariationV1<?> variation= (VariationV1<?>) beans.getBean("single-variation",divisionName,divResult);
+          variation= (VariationV1<?>) beans.getBean(singleDivBean,divisionName,divResult);
 
 
-        Product createdProduct= (Product) beans.getBean( "product-single",
-                                                         productName,
-                                                         productBrand,
-                                                         aboutProduct,
-                                                         descriptions,
-                                                         variation);
+         newProduct= (Product) beans.getBean(   productVarBean,
+                                                productName,
+                                                productBrand,
+                                                aboutProduct,
+                                                descriptions,
+                                                variation);
 
 
-        return Optional.of(productRepository.save(createdProduct));
+        return Optional.of(productRepository.save(newProduct));
 
     }
 
@@ -145,29 +152,33 @@ public class ProductDataService {
                                             Map<String,String> aboutProduct)
     {
 
+
+
+                        Product newProduct;
+
+
                   productBrand=productBrand.trim().toLowerCase();
                   productName=productName.trim().toLowerCase();
 
                   if(checkProduct(productName,productBrand))
                       throw new IllegalStateException("Product id already Stored "+productName);
 
-                  QuantityV1 quantity= (QuantityV1) beans.getBean("nos-quantity",
+                  QuantityV1 quantity= (QuantityV1) beans.getBean(qtyBean,
                                                              priceQuantity.Quantity(),
-                                                             beans.getBean("price",priceQuantity.price())
+                                                             beans.getBean(priceBean,priceQuantity.price())
                                                          );
-                  Product createdProduct= (Product) beans.getBean( "product-none",
-                                                                    productName,
-                                                                    productBrand,
-                                                                    aboutProduct,
-                                                                    descriptions,
-                                                                    quantity);
+                  newProduct= (Product) beans.getBean(  productNoneBean,
+                                                        productName,
+                                                        productBrand,
+                                                        aboutProduct,
+                                                        descriptions,
+                                                        quantity);
 
-
-
-
-                   return Optional.of(productRepository.save(createdProduct));
+                   return Optional.of(productRepository.save(newProduct));
 
     }
+
+
     public Optional<Product> readProduct(String productName,String productBrand)
     {
         return productRepository
