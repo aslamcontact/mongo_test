@@ -4,6 +4,7 @@ import com.aslam.mycontact.configuration.BeanConfiguration;
 import com.aslam.mycontact.daolayer.catelog.*;
 import com.aslam.mycontact.daolayer.catelog.quantity.QuantityV1;
 import com.aslam.mycontact.daolayer.catelog.variation.*;
+import com.aslam.mycontact.exceptions.ProductException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
@@ -29,10 +30,10 @@ public class ProductDataService {
     final
 
 
-    public record DoubleDivision(String mainDivName,String subDivName,List<SubDiv> subDivs){};
-    public record SubDiv(String divideValue,Double price,Long quantity){};
-    public record SingleDivision(String divideValue, Double price, Long quantity){};
-    public record  None(Long Quantity,Double price){};
+    public  record  DoubleDivision(String mainDivName,String subDivName,List<SubDiv> subDivs){};
+    public  record  SubDiv(String divideValue,Double price,Long quantity){};
+    public  record  SingleDivision(String divideValue, Double price, Long quantity){};
+    public  record  None(Long quantity,Double price){};
 
 
 
@@ -53,7 +54,9 @@ public class ProductDataService {
         productName=productName.trim().toLowerCase();
 
         if(checkProduct(productName,productBrand))
-            throw new IllegalStateException("Product id already Exists "+productName);
+            throw new ProductException("Product Name "+productName+
+                    " and Brand "+productBrand+" is Already Exists ");
+
 
         Map<String,SingleVariation> divResult=divideProducts
                 .stream()
@@ -110,7 +113,8 @@ public class ProductDataService {
         productBrand=productBrand.trim().toLowerCase();
         productName=productName.trim().toLowerCase();
         if(checkProduct(productName,productBrand))
-            throw new IllegalStateException("Product id already Exists "+productName);
+            throw new ProductException("Product Name "+productName+
+                                       " and Brand "+productBrand+" is Already Exists ");
 
         Map<String,QuantityV1> divResult=divideProducts
                                             .stream()
@@ -152,19 +156,17 @@ public class ProductDataService {
                                             Map<String,String> aboutProduct)
     {
 
-
-
                         Product newProduct;
-
-
                   productBrand=productBrand.trim().toLowerCase();
                   productName=productName.trim().toLowerCase();
 
                   if(checkProduct(productName,productBrand))
-                      throw new IllegalStateException("Product id already Stored "+productName);
+                      throw new ProductException("Product Name "+productName+
+                                                   "  and Brand"+productBrand+
+                                                     " is  Already Used");
 
                   QuantityV1 quantity= (QuantityV1) beans.getBean(qtyBean,
-                                                             priceQuantity.Quantity(),
+                                                             priceQuantity.quantity(),
                                                              beans.getBean(priceBean,priceQuantity.price())
                                                          );
                   newProduct= (Product) beans.getBean(  productNoneBean,
@@ -181,13 +183,18 @@ public class ProductDataService {
 
     public Optional<Product> readProduct(String productName,String productBrand)
     {
-        return productRepository
+        Optional<Product> result;
+        result= productRepository
                 .findById("Id_"+(productName+productBrand.toLowerCase().trim()));
+        if(result.isEmpty())
+            throw new ProductException("There is No Product With This Name "
+                    +productName+" and Brand "+productBrand);
+        return result;
     }
     public Product updateProduct(Product newProduct)
     {
         if(!checkProduct(newProduct.getProductName(),newProduct.getBrand()))
-            throw new IllegalStateException("Check Product Name and Brand");
+            throw new ProductException("Check The Product Name and Brand");
        return productRepository.save(newProduct);
     }
 
@@ -199,7 +206,8 @@ public class ProductDataService {
         productBrand=productBrand.trim().toLowerCase();
 
         if(!checkProduct(productName,productBrand))
-            throw new IllegalStateException("No Product ( "+productName+" "+productBrand+" )");
+            throw new ProductException("There is No Product with This Name and Product ( "
+                    +productName+" "+productBrand+" )");
 
         productRepository.deleteById("Id_"+productName+productBrand);
     }
