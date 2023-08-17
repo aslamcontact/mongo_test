@@ -27,9 +27,6 @@ public class SingleVariation implements VariationV1 {
     }
 
 
-
-
-
     @Override
     public  Map<String,QuantityV1> getVariations() {
         return this.variations;
