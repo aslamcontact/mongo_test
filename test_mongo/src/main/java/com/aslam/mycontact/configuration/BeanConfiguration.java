@@ -47,10 +47,12 @@ public class BeanConfiguration {
 
     @Bean("double-variation")
     @Scope("prototype")
-    public DoubleVariation doubleVariation(String name)
+    public DoubleVariation doubleVariation(String name,
+                                           Map<String,SingleVariation> variations)
     {
         DoubleVariation variation=new DoubleVariation();
         variation.setName(name);
+        variation.setVariations(variations);
         return  variation;
     }
 
